@@ -1,0 +1,9 @@
+{
+    "dao_source": "pdo",
+    "cookie_iv": "2f57912d7bd53cc6f8e8af813c8d738a",
+    "cookie_key": "ra51pnvb",
+    "default_lang": "en",
+    "dev_mode": true,
+    "app_installed": false,
+    "ssl_enabled": false
+}

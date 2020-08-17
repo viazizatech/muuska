@@ -1,0 +1,11 @@
+{
+	"library": {
+		"title": "Bibliothèque"
+	},
+	"addressId": "Adresse",
+	"name": "Nom",
+	"openingTime": "Horaire d'ouverture",
+	"accessibility": "Accessibilité",
+	"image": "Image",
+	"description": "Description"
+}

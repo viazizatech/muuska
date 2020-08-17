@@ -1,0 +1,9 @@
+{
+	"danger": {
+		"The action you specified does not exist": "The action you specified does not exist",
+		"You do not have permission to access this resource": "You do not have permission to access this resource",
+		"Security access failed": "Security access failed",
+		"%s is required": "%s is required",
+		"Invalid value for %s": "Invalid value for %s"
+	}
+}

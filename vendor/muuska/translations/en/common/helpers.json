@@ -1,0 +1,62 @@
+{
+	"list": {
+		"Search": "Search",
+		"Reset": "Reset",
+		"Actions": "Actions",
+		"No data found": "No data found",
+		"From": "From",
+		"To": "To",
+		"Asc": "Asc",
+		"Desc": "Desc",
+		"Advanced Search Form": "Advanced Search Form",
+		"Filter": "Filter",
+		"Sort by": "Sort by",
+		"(%d selected)": {
+			"plural": "(%d selected)",
+			"singular": "(%d selected)"
+		},
+		"%d Total": "%d Total",
+		"Showing %1$d - %2$d of %3$d": "Showing %1$d - %2$d of %3$d",
+		"All": "All",
+		"Add new": "Add new",
+		"Add": "Add",
+		"Add sub items": "Add sub items",
+		"View": "View",
+		"Update": "Update",
+		"Activate": "Activate",
+		"Deactivate": "Deactivate",
+		"Delete": "Delete",
+		"Are you sure to delete this record ?": "Are you sure to delete this record ?",
+		"Update status": "Update status",
+		"Update state": "Update state",
+		"Are you sure to delete %d selected records ?": "Are you sure to delete %d selected records ?"
+	},
+	"form": {
+		"An error occurred while loading object": "An error occurred while loading object",
+		"Edit": "Edit",
+		"Add new": "Add new",
+		"Cancel": "Cancel",
+		"Some field are invalid": "Some field are invalid",
+		"Save": "Save",
+		"Save and add new": "Save and add new",
+		"Save and view": "Save and view",
+		"Save and stay": "Save and stay",
+		"Save and exit": "Save and exit",
+		"Back": "Back",
+		"All": "All",
+		"An error occurred while saving": "An error occurred while saving"
+	},
+	"view": {
+		"An error occurred while loading object": "An error occurred while loading object",
+		"View": "View",
+		"Back": "Back",
+		"Informations": "Informations"
+	},
+	"upload": {
+		"An error occurred while deleting file": "An error occurred while deleting file",
+		"An error occurred during the file upload process.": "An error occurred during the file upload process.",
+		"This file extension is not allowed.": "This file extension is not allowed.",
+		"An error occurred adding content to main file": "An error occurred adding content to main file",
+		"File not exist": "File not exist"
+	}
+}
