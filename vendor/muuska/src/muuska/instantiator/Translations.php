@@ -58,7 +58,7 @@ class Translations
 	 * @return \muuska\translation\loader\source\JsonTranslationLoader
 	 */
 	public function createJSONTranslationLoader($filePattern) {
-	    return new \muuska\translation\loader\source\JsonTranslationLoader($filePattern);
+	    return new \muuska\translation\loader\source\JSONTranslationLoader($filePattern);
 	}
 	
 	/**
