@@ -1,7 +1,0 @@
-{
-	"header_left": ["logo"],
-	"header_center": ["mainNav"],
-	"header_right": ["searchForm", "notifications", "quick_actions", "cart", "quick_panel", "languages", "user_account"],
-	"footer_left": ["copyright"],
-	"footer_right": ["footer_menu"]
-}
