@@ -1,8 +1,0 @@
-{
-	"danger": {
-		"Name is required": "Le nom est requis"
-	},
-	"success": {
-		"Name is valid": "Le nom est valide"
-	}
-}
