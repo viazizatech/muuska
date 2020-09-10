@@ -1,0 +1,11 @@
+{
+	"hello-world": {
+		"Hello world": {
+			"": "Bonjour le monde",
+			"everyone": "Bonjour tout le monde"
+		}
+	},
+	"goodbye": {
+		"Good bye": "Aurevoir"
+	}
+}

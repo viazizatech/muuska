@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "type": "FRAMEWORK",
+        "name": "",
+        "active": 1,
+        "version": "1.0",
+        "eventString": "admin_controller_page_formating",
+        "mainClass": "muuska\\project\\Framework",
+        "lastUpgradeDate": "",
+        "creationDate": "2020-08-11 08:39:35",
+        "lastModifiedDate": "2020-08-11 08:39:35"
+    },
+    {
+        "id": 2,
+        "type": "APPLICATION",
+        "name": "",
+        "active": 1,
+        "version": "4.4",
+        "eventString": "",
+        "mainClass": "myapp\\MyApp",
+        "lastUpgradeDate": "2020-08-25 09:07:28",
+        "creationDate": "2020-08-11 08:39:35",
+        "lastModifiedDate": "2020-08-25 09:07:28"
+    },
+    {
+        "id": 3,
+        "type": "MODULE",
+        "name": "mymod",
+        "active": 1,
+        "version": "1.0",
+        "eventString": "",
+        "mainClass": "mymod\\MyMod",
+        "lastUpgradeDate": "",
+        "creationDate": "2020-08-11 08:39:35",
+        "lastModifiedDate": "2020-08-11 08:39:35"
+    },
+    {
+        "id": 4,
+        "type": "FRAMEWORK",
+        "name": "",
+        "active": 1,
+        "version": "1.0",
+        "eventString": "admin_controller_page_formating",
+        "mainClass": "muuska\\project\\Framework",
+        "lastUpgradeDate": "",
+        "creationDate": "2020-08-25 09:07:28",
+        "lastModifiedDate": "2020-08-25 09:07:28"
+    },
+    {
+        "id": 5,
+        "type": "FRAMEWORK",
+        "name": "",
+        "active": 1,
+        "version": "1.0",
+        "eventString": "admin_controller_page_formating",
+        "mainClass": "muuska\\project\\Framework",
+        "lastUpgradeDate": "",
+        "creationDate": "2020-08-25 09:07:45",
+        "lastModifiedDate": "2020-08-25 09:07:45"
+    },
+    {
+        "id": 6,
+        "type": "APPLICATION",
+        "name": "",
+        "active": 1,
+        "version": "4.4",
+        "eventString": "",
+        "mainClass": "myapp\\MyApp",
+        "lastUpgradeDate": "",
+        "creationDate": "2020-08-25 09:07:45",
+        "lastModifiedDate": "2020-08-25 09:07:45"
+    }
+]

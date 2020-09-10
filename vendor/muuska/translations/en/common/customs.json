@@ -1,0 +1,43 @@
+{
+	"abstract_controller": {
+		"add": {
+			"": "Add",
+			"action_title": "Add",
+			"success_label": "Added successfully"
+		},
+		"update": {
+			"": "Update",
+			"action_title": "Update",
+			"success_label": "Updated successfully"
+		},
+		"delete": {
+			"": "Delete",
+			"action_title": "Delete",
+			"success_label": "Deleted successfully"
+		},
+		"view": {
+			"": "View",
+			"action_title": "View"
+		},
+		"activate": {
+			"": "Activate",
+			"action_title": "Activate",
+			"success_label": "Activated successfully"
+		},
+		"deactivate": {
+			"": "Deactivate",
+			"action_title": "Deactivate",
+			"success_label": "Deactivated successfully"
+		},
+		"update-state": {
+			"": "Update state",
+			"action_title": "Update state",
+			"success_label": "State updated successfully"
+		},
+		"update-password": {
+			"": "Update password",
+			"action_title": "Update password",
+			"success_label": "Password updated successfully"
+		}
+	}
+}
