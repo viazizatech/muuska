@@ -11,10 +11,10 @@ use myapp\model\MembreDefinition;
 use myapp\model\SouscrireDefinition;
 use myapp\model\SanctionDefinition ;
 use myapp\model\RemboursementDefinition;
-use myapp\model\ ProfilDefinition;
+use myapp\model\ ProfilDefinition;//Unexpected
 use myapp\model\InteretDefinition ;
-use myapp\model\ FondDefinition;
-use myapp\model\ ExerciceDefinition;
+use myapp\model\ FondDefinition;//Unexpected
+use myapp\model\ ExerciceDefinition;//Unexpected
 use myapp\model\EtablirDefinition;
 use myapp\model\EpargnerDefinition ;
 use myapp\model\AssociationDefinition;
