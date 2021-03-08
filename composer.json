@@ -1,0 +1,19 @@
+{
+    "name": "muuska/app",
+    "authors": [
+        {
+            "name": "ViaZi Za Tech",
+            "email": "contact@viaziza.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.3",
+        "muuska/php-mvc-core": "1.0.2"
+    },
+    "description": ""
+}
