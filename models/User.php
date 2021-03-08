@@ -1,9 +1,4 @@
 <?php
-/**
- * User: TheCodeholic
- * Date: 7/8/2020
- * Time: 9:15 AM
- */
 
 namespace app\models;
 
