@@ -1,9 +1,5 @@
 <?php
-/**
- * User: TheCodeholic
- * Date: 7/10/2020
- * Time: 8:21 AM
- */
+
 
 use muuska\app\Application;
 
