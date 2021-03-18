@@ -32,7 +32,11 @@ class LoginForm extends Model
             'password' => 'Password'
         ];
     }
-
+    
+    /**
+     * Find user
+     * with email
+     */
     public function login()
     {
         $user = User::findOne(['email' => $this->email]);
