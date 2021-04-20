@@ -83,4 +83,6 @@ class SiteController extends Controller
     {
         return $this->render('profile');
     }
+    //Gestion de plusieurs vues
+
 }
