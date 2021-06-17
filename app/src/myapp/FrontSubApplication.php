@@ -11,7 +11,9 @@ class FrontSubApplication extends AbstractSubApplication
             $result = new \myapp\controller\front\HelloWorldController($input);
         }elseif ($input->checkName('association')) {
             $result = new \myapp\controller\front\AssoModelController ($input);
-        }elseif ($input->checkName('test-model')) {
+        }elseif ($input->checkName('home')) {
+            $result = new \myapp\controller\front\AssoModelController ($input);
+         } elseif ($input->checkName('test-model')) {
             $result = new \myapp\controller\front\TestAssoDaoController($input);
         }elseif ($input->checkName('test-param')) {
             $result = new \myapp\controller\front\TestParamController($input);

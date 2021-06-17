@@ -32,7 +32,7 @@ class AnnonceDefinition extends AbstractModelDefinition
                     'type' => DataType::TYPE_INT,
                     'nature' => FieldNature::EXISTING_MODEL_ID,
                     'required' => true,
-                    'reference' => AssociationDefinition::getInstance(),
+                    'reference' => MembreDefinition::getInstance(),
                     'onDelete' => ReferenceOption::CASCADE
                 ),
                 'auteur_annonce' => array(

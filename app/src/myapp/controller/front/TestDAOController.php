@@ -11,9 +11,15 @@ use myapp\constants\Accessibility;
 use myapp\model\Association ;
 use myapp\model\AssociationDefinition;
 use myapp\model\AssociationMembreDefinition;
+use myapp\model\Epargne;
 use myapp\model\MembreDefinition;
 use myapp\model\ExerciceDefinition;
 use myapp\model\SeanceDefinition;
+use myapp\model\EpargneDefinition;
+use myapp\model\EmpruntDefinition;
+use muuska\dao\AbstractDAO;
+use myapp\model\Emprunt;
+
 class TestDAOController extends AbstractController
 {
     protected function processDefault()
@@ -112,7 +118,7 @@ class TestDAOController extends AbstractController
          
          
          /*Ajout de la specialité*/
-         $specialityDao->add($speciality2);
+         
          
          $libSpeciality2 = AssociationMembreDefinition::getInstance()->createModel();
          $libSpeciality2->setPropertyValue('membreId', $speciality2->getPropertyValue('id'));
@@ -126,8 +132,164 @@ class TestDAOController extends AbstractController
         $saveConfig = $this->input->createSaveConfig();
         
         /*On demande qu'il associe les specialité à la bibliotèque après son enregistrement*/
-        $saveConfig->createMultipleSaveAssociation('membre');
-        $AssociationDao->add($asso, $saveConfig);
-        $AssociationDao->add($asso, $saveConfig);
+        
     }
+    protected function processSelectWithTotal() {
+        $libraryDao = $this->input->getDAO(MembreDefinition::getInstance());
+        $selectionConfig = $this->input->createSelectionConfig();
+        $selectionConfig->setDataCountingEnabled(true);
+        $selectionConfig->setLimit(1);
+        $data = $libraryDao->getData($selectionConfig);
+        var_dump('total without limit : ', $data->getTotalWithoutLimit());
+        var_dump($data);
+    }
+    protected function processEpargneTotal() {
+        $libraryDao = $this->input->getDAO(EpargneDefinition::getInstance());
+        $selectionConfig = $this->input->createSelectionConfig();
+        $selectionConfig->setDataCountingEnabled(true);
+        $selectionConfig->setLimit(1);
+        $data = $libraryDao->getData($selectionConfig);
+        var_dump('total without limit : ', $data->getTotalWithoutLimit());
+        var_dump($data);
+    }
+    protected function processSelectEpargne() {
+        $libraryDao = $this->input->getDAO(EpargneDefinition::getInstance());
+        $selectionConfig = $this->input->createSelectionConfig();
+        $selectionConfig = $this->input->createSelectionConfig();
+        $selectionConfig->getSpecificFields(('montant_epargne'));
+        $data = $libraryDao->getModelValue($selectionConfig,'montant_epargne');
+        var_dump($data);
+        foreach ($data as $object) {
+            $object->getPropertyValue('montant_epargne');
+            
+        }
+        var_dump( $object->getPropertyValue('montant_epargne'));
+
+    }
+    protected function processEpargne() {
+        $epargneDao = $this->input->getDAO(EpargneDefinition::getInstance());
+        $epargne = new Epargne();
+        $selectionConfig = $this->input->createSelectionConfig();
+        $selectionConfig->setSelectionAssociationParams('membreId');
+        $data = $epargneDao->getData($selectionConfig);
+        var_dump($data);
+        $table = App::htmls()->createTable($data );
+        foreach ($data as $object) {
+            
+            var_dump($object->getAssociated('membreId'));
+            print_r($object->getTotalMontant());
+            
+       
+        }
+    }
+    public function processTotalMontant($montant_epargne){
+        
+        $epargne = $this->input->getDAO(EpargneDefinition::getInstance());
+        foreach ($epargne as $epargne){
+            $epargne = $montant_epargne += $this->montant_epargne;
+            print_r($epargne) ;
+        }
+        
+      
+   }
+    protected function processRestriction() {
+        $libraryDao = $this->input->getDAO(AssociationDefinition::getInstance());
+        $selectionConfig = $this->input->createSelectionConfig();
+        $selectionConfig->setRestrictionFieldParams('nom_assoc', 'rares', Operator::CONTAINS);
+        $data = $libraryDao->getData($selectionConfig);
+        foreach ($data as $model){
+            print_r($model->getPropertyValue('nom_assoc'));
+            echo '<br>';
+        }
+    }
+    protected function processEpar(){
+        $dao = $this->input->getDAO(EpargneDefinition::getInstance());
+        $data = $dao->getData();
+        $montant_epargne = 0;
+        $emprunt = new Emprunt;
+
+        $interet = 0;
+        foreach ($data as $epargne){
+           
+         $total_epargne = $montant_epargne += (float)$epargne->getPropertyValue('montant_epargne') ;
+        }
+        if($emprunt->getMontant_emprunt(100000)<$total_epargne){
+            echo('ok');
+        }else{echo('no');}
+        
+        print_r($total_epargne);
+        return($total_epargne);    
+    }
+    protected function processCheckLoan($total_epargne){
+        $dao = $this->input->getDAO(EmpruntDefinition::getInstance());
+        $data = $dao->getData();
+        if($data -> $this->montant_emprunt > $total_epargne  ){
+            return true;
+        }
+        return false;    
+    }
+    protected function processwithdraw($total_epargne){
+        $dao = $this->input->getDAO(EmpruntDefinition::getInstance());
+        $data = $dao->getData();
+        if($data -> $this->montant_emprunt > $total_epargne  ){
+            return true;
+        }
+        return false;    
+    }
+    
+    protected function processRestrictionAssociation() {
+        $libraryDao = $this->input->getDAO(EpargneDefinition::getInstance());
+        $selectionConfig = $this->input->createSelectionConfig();
+        $nom = array('Paris', 'Washington');
+        $restriction = App::daos()->createFieldRestriction('membreId', $nom, Operator::IN_LIST);
+        $restriction->setForeign(true);
+        $restriction->setExternalField('prenom');
+        $selectionConfig->addRestrictionField($restriction, 'prenom');
+        $selectionConfig->setSelectionAssociationParams('membreId');
+        $data = $libraryDao->getData($selectionConfig);
+        foreach ($data as $model){
+            $address = $model->getAssociated('membreId');
+            print_r($address->getPropertyValue('nom') . ' : ' . $model->getNom());
+            echo '<br>';
+        }
+        var_dump( $data);
+    }
+    protected function processSortAssociation() {
+        $libraryDao = $this->input->getDAO(EpargneDefinition::getInstance());
+        $selectionConfig = $this->input->createSelectionConfig();
+        $sortOption = App::daos()->createSortOption('membreId', SortDirection::ASC);
+        $sortOption->setForeign(true);
+        $sortOption->setExternalField('id');
+        $selectionConfig->addSortOption($sortOption, 'id');
+        $selectionConfig->setSelectionAssociationParams('membreId');
+        $data = $libraryDao->getData($selectionConfig);
+        $membre= array();
+        $membre['nom']='';
+        $membre['prenom']='';
+        $membre['totalmembre']=0;
+        $membre['interet']=0;
+        $membre['global']=0;
+        foreach ($data as  $model){
+            $address = $model->getAssociated('membreId');
+            //print_r($address->getPropertyValue('nom') . ' : ' . $model->getName());
+            $membre['nom']=$address->getPropertyValue('nom');
+            $membre['prenom']=$address->getPropertyValue('prenom');
+            $membre['totalmembre']  = (float)$model->getPropertyValue('montant_epargne'); 
+            $membre['interet'] = (float)$model->getPropertyValue('taux_epargne');
+            $membre['global'] = (float)$model->getPropertyValue('taux_epargne');
+              /* foreach ($data as $epargne){  
+                $membre['totalmembre']  = (float)$epargne->getPropertyValue('montant_epargne'); 
+               
+                    
+                print_r($membre );  
+                }*/
+            
+                 
+                print_r($membre );  
+        }
+        return $membre ;
+        
+    }
+    
+    
 }

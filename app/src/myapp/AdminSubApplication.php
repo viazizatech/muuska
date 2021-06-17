@@ -2,9 +2,9 @@
 namespace myapp;
 
 use muuska\project\AbstractSubApplication;
+use muuska\controller\event\ControllerPageFormatingListener;
 
-
-class AdminSubApplication extends AbstractSubApplication
+class AdminSubApplication extends AbstractSubApplication implements ControllerPageFormatingListener
 {
     public function createController(\muuska\controller\ControllerInput $input) {
         $result = null;
@@ -36,12 +36,19 @@ class AdminSubApplication extends AbstractSubApplication
                             $result = new \myapp\controller\admin\EtreMembreAdminController($input);
         } elseif ($input->checkName('timbre')) {
                             $result = new \myapp\controller\admin\TimbreAdminController($input);
-        }elseif ($input->checkName('sanction')) {
-                                $result = new \myapp\controller\admin\SanctionAdminController($input);
+        }elseif ($input->checkName('caisse')) {
+                                $result = new \myapp\controller\admin\CaisseAdminController($input);
+         } elseif ($input->checkName('sanction')) {
+                                    $result = new \myapp\controller\admin\SanctionAdminController($input);
          } elseif ($input->checkName('annonce')) {
                                 $result = new \myapp\controller\admin\AnnonceAdminController($input);
         };
         
         return $result;
     }
+    
+    public function onAppControllerPageFormating(\muuska\controller\event\ControllerPageFormatingEvent $event){
+        $event->addMainNavItem(array('title' => 'association','title' => 'annonce'));
+    }
+    
 }

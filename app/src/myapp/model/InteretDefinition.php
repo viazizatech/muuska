@@ -40,6 +40,7 @@ class InteretDefinition extends AbstractModelDefinition
                     'type' => DataType::TYPE_STRING,
                     'nature' => FieldNature::LONG_TEXT,
                     'required' => true,
+                    'lang'     => true,
                     'maxsize'=> 25
                     
                 ),

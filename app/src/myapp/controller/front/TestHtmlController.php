@@ -7,9 +7,24 @@ use muuska\html\constants\IconPosition;
 use muuska\html\form;
 use muuska\html\HtmlContent;
 use muuska\util\App;
+use muuska\dao\util\SelectionConfig;
 use myapp\option\AccessibilityProvider;
 use muuska\constants\FileTypeConst;
 use myapp\model\AssociationDefinition;
+use myapp\model\MembreDefinition;
+use muuska\asset\constants\AssetType;
+use muuska\html\listing\item\ListItem;
+use \muuska\html\listing\tree\MenuList;
+use \muuska\html\listing\tree\HtmlTree;
+use muuska\html\listing\item\ListItemContainer;
+use myapp\model\EpargneDefinition;
+use myapp\model\ ProfilDefinition;
+use myapp\model\ SeanceDefinition;
+use muuska\html\listing\AbstractList;
+use muuska\dao\constants\DAOFunctionCode;
+use muuska\dao\constants\SortDirection;
+use \muuska\dao\AbstractDAO;
+use myapp\model\Epargne;
 
 class TestHtmlController extends AbstractController
 {
@@ -254,58 +269,244 @@ class TestHtmlController extends AbstractController
         $content->convertToRangeDatePicker($langIso);
         $this->result->setContent($content);
     }
-    protected function processForm()
+    
+    protected function processTable()
     {
-        $form = App::htmls()->createForm('my_template');
-        $nomInput = App::htmls()->createHtmlInput('text', 'my_input',$this->l('Association'));
-        $nomField = App::htmls()->createFormField('nom', null,  $nomInput);
-        $form->addChild($nomField);
-        
-       //ajout du siege
+        $definition = AssociationDefinition::getInstance();
+        $data = $this->input->getDAO($definition)->getData($this->input->createSelectionConfig());
+        $table = App::htmls()->createTable($data );
+        $nameRenderer = App ::renderers()->createSimpleValueRenderer(App::getters()->createModelValueGetter($definition, 'nom_assoc'));
+        $table->createField('nom_assoc', $nameRenderer,  'Nom');
+        $accesRenderer = App ::renderers()->createOptionLabelRenderer(new AccessibilityProvider($this->input->getLang()), 
+        App::getters()->createModelValueGetter($definition, 'accessibility'));
+        $table->createField('accessible', $accesRenderer ,  'Accessible');
+        $table->addClassesFromString('table-striped table-bordered table-hover');
+        $this->result->setContent($table);
+     
+    }
+    protected function processFullNav()
+    {
+        $nav = App::htmls()->createHtmlNav();
+        $imageItem = $nav->createItem('image', App::createHtmlString('Image'));
+        /*Contenu de l'element*/
+        $imageItem->setNavContent(App::htmls()->createHtmlImage('http://localhost/test/img.jpg', 'My image'));
+        /*Indiquer que l'element a été chargé*/
+        $imageItem->setLoaded(true);
+        /*Element actif*/
+        $imageItem->setActive(true);
+        $buttonItem = $nav->createItem('button', App::createHtmlString('Button'));
+        $buttonItem->setNavContent(App::htmls()->createButton(App::createHtmlString('My button')));
+        $buttonItem->setLoaded(true);
+        $nav->createItem('form', App::createHtmlString('association'), $this->urlCreator->createUrl(''));
+        $nav->createItem('menu', App::createHtmlString('Menu'), $this->urlCreator->createUrl('menu'));
+        $nav->createItem('table', App::createHtmlString('Table'), $this->urlCreator->createUrl('table'));
+        $nav->createItem('tree', App::createHtmlString('Tree'), $this->urlCreator->createUrl('tree'));
+        $fullNav = App::htmls()->createFullNavigation($nav);
+        $this->result->setContent($fullNav);
+    }
+    /**
+     * @param \muuska\getter\Getter $subValuesGetter
+     */
 
-        $siegeInput = App::htmls()->createHtmlInput('text', '',$this->l('Siege'));
-        $siegeField = App::htmls()->createFormField('siege', null,  $siegeInput);
-        $form->addChild($siegeField);
-        $this->result->setContent($form);
-        //ajout de la devise
-        $deviseInput = App::htmls()->createHtmlInput('text', '',$this->l('Devise'));
-        $siegeField = App::htmls()->createFormField('Devise', null,  $deviseInput);
-        $form->addChild($siegeField);
-        $this->result->setContent($form);
-         //ajout du contact
-         $telephoneInput = App::htmls()->createHtmlInput('text', '',$this->l('Telephone'));
-        $telephoneField = App::htmls()->createFormField('telephone', null,  $telephoneInput);
-        $form->addChild($telephoneField);
+    protected function processMenuArray()
+    {
+                    $data = array(
+                    array(
+                        'title' => 'Test html',
+                        'children' => array(
+                                            array(
+                                            'title' => 'Image',
+                                            'controller' => 'test-html',
+                                            'action' => 'image'
+                                        ),
+                        array(
+                            'title' => 'Commandes',
+                            'children' => array(
+                                array(
+                                'title' => 'Button',
+                                'controller' => 'test-html',
+                                'action' => 'button'
+                                ),
+                                array(
+                                'title' => 'Link',
+                                'controller' => 'test-html',
+                                'action' => 'link'
+                                ),
+                    )
+                    ),
+                        array(
+                            'title' => 'Form',
+                            'controller' => 'test-html',
+                            'action' => 'form'
+                        ),
+                        array(
+                        'title' => 'Menu array',
+                        'controller' => 'test-html',
+                        'action' => 'menu-array'
+                        ),
+                    )
+                    ),
+                    array(
+                    'title' => 'Test model',
+                    'controller' => 'test-model'
+                    ),
+                    array(
+                    'title' => 'Test DAO',
+                    'controller' => 'test-dao'
+                    )
+                    );
+                    $menu = App::htmls()->createMenuList($data);
+                    $menu->createTitleField(App::renderers()->createSimpleValueRenderer(App::getters()->createArrayValueGetter('title')));
+                    $menu->setSubValuesGetter(App::getters()->createArrayChildrenGetter());
+                    $menu->createDefaultAction(App::urls()->createArrayUrl($this->input));
+                    $this->result->setContent($menu);
+            
+          }
+                    protected function processMenu()
+                    {
+                    $definition = AssociationDefinition::getInstance();
+                    $selectionConfig = $this->input->createSelectionConfig();
+                    
+                    $dao = $this->input->getDAO($definition);
+                    $data = $dao->getData($selectionConfig);
+                   
+                    $menu = App::htmls()->createHtmlTree($data);
+                    $menu->createTitleField(App::renderers()->createSimpleValueRenderer(App::getters()->createModelValueGetter($definition, 'nom_assoc')));
+                    
+                    $menu->setSubValuesGetter(App::getters()->createChildrenModelGetter($dao, $this->input->createSelectionConfig()));
+                    $menu->createDefaultAction(App::urls()->createModelUrl($this->input, $definition, 'view'));
+                    $this->result->setContent($menu);
+                    }
+                    protected function processNav()
+                        {
+                            $nav = App::htmls()->createHtmlNav();
+                            $nav->createItem('home', App::createHtmlString('Home'), '#',
+                            App::createFAIcon('home'));
+                            $nav->createItem('user', App::createHtmlString('Users'), 'membre',
+                            App::createFAIcon('user'));
+                            $nav->createItem('association', App::createHtmlString('Association'));
+                            $productItem = $nav->createItem('product', App::createHtmlString('Products'));
+                            /*Element actif*/
+                            $productItem->setActive(true);
+                            $this->result->setContent($nav);
+                        }
+     protected function processMenuTemplate()
+   {
+        $definition = AssociationDefinition::getInstance();
+        $selectionConfig = $this->input->createSelectionConfig();
+
+        $dao = $this->input->getDAO($definition);
+        $data = $dao->getData($selectionConfig);
+        $menu = App::htmls()->createMenuList($data);
+        $menu->createTitleField(App::renderers()->createSimpleValueRenderer(App::getters()->createModelValueGetter($definition,'nom_assoc')));
+          $menu->createDefaultAction(App::urls()->createModelUrl($this->input,$definition, 'view'));
+   /*Template*/
+          $menu->setRenderer($this->getThemeTemplate('listing/tree/menu/simple/list'));
+          $menu->setItemRenderer($this->getThemeTemplate('listing/tree/menu/simple/item'));
+            $this->result->setContent($menu);
+   }
+
+
+    protected function processTree()
+   {
+       $definition = profilDefinition::getInstance();
+       $selectionConfig = $this->input->createSelectionConfig();
+       $selectionConfig->addRestrictionFieldFromParams('parentId', null);
+       $dao = $this->input->getDAO($definition);
+       $data = $dao->getData($selectionConfig);
+       $tree = App::htmls()->createHtmlTree($data);
+       $tree->createTitleField(App::renderers()->createSimpleValueRenderer(App::getters()->createModelValueGetter($definition,'type_profil')));
+       $tree->setSubValuesGetter(App::getters()->createChildrenModelGetter($dao,$this->input->createSelectionConfig()));
+       $this->result->setContent($tree);
+   }
+
+
+   protected function processTableau()
+   {
+    $lib = MembreDefinition::getInstance();
+    $dat = $this->input->getDAO($lib)->getData($this->input->createSelectionConfig());
+    $tabl = App::htmls()->createTable($dat );
+    $namRenderer = App ::renderers()->createSimpleValueRenderer(App::getters()->createModelValueGetter($lib , 'nom'));
+    $tabl->createField('nom', $namRenderer,  'Nom');
+    $definition = EpargneDefinition::getInstance();
+    $data = $this->input->getDAO($definition)->getData($this->input->createSelectionConfig());
+    $table = App::htmls()->createTable($data );
+    $nameRenderer = App ::renderers()->createSimpleValueRenderer(App::getters()->createModelValueGetter($definition, 'montant_epargne'));
+    $table->createField('montant_epargne', $nameRenderer,  'Epargne');
+    $typeRenderer = App ::renderers()->createSimpleValueRenderer(App::getters()->createModelValueGetter($definition, 'type_epargne'));
+    $table->createField('type_epargne', $typeRenderer ,  'type_epargne');
+    $table->addClassesFromString('table-striped table-bordered table-hover');
+    $this->result->setContent($table);
+    
+   }
+   protected function processTableauEpargne()
+   {
+    $table = App::htmls()->createTable();
+    $nameRenderer = App ::renderers()->createSimpleValueRenderer(App::getters()->createModelValueGetter($definition, 'nom_assoc'));
+   }
+   protected function processSelectAssociation() {
+    $libraryDao = $this->input->getDAO(EpargneDefinition::getInstance());
+    $selectionConfig = $this->input->createSelectionConfig();
+    $selectionConfig->setSelectionAssociationParams('membreId') ;
+    $data = $libraryDao->getData($selectionConfig);
+    $data = App::htmls()->createTable($data );
+    foreach ($data as $object) {   
+    var_dump($object->getAssociated('membreId'));
+    }
+    }
+    protected function processSort() {
+        $libraryDao = $this->input->getDAO(AssociationDefinition::getInstance());
+        $selectionConfig = $this->input->createSelectionConfig();
+        $selectionConfig->setSortOptionParams('nom_assoc', SortDirection::DESC);
+        $data = $libraryDao->getData($selectionConfig);
+        var_dump($data);
+        foreach ($data as $model){
+            print_r($model->getNom_assoc());
+            echo '<br>';
+        }
+    }
+    protected function processSortAssociation() {
+        $libraryDao = $this->input->getDAO(EpargneDefinition::getInstance());
+        $selectionConfig = $this->input->createSelectionConfig();
+        $sortOption = App::daos()->createSortOption('membreId', SortDirection::ASC);
+        $sortOption->setForeign(true);
+        $sortOption->setExternalField('nom');
+        $selectionConfig->addSortOption($sortOption, 'nom');
+        $selectionConfig->setSelectionAssociationParams('membreId');
+        $data = $libraryDao->getData($selectionConfig);
+        $table = App::htmls()->createTable($data );
+        var_dump( $data = $libraryDao->getData($selectionConfig));
+        foreach ($data as $model){
+            $address = $model->getAssociated('membreId');
+            print_r($address->getPropertyValue('nom') . ' : ' . $model->getnom());
+            echo '<br>';
+        }
+    }
+    
+    public function getInteret($taux_epargne,$montant_epargne){
+        $interet_epargne =$montant_epargne *= 1 + $taux_epargne;
+        return $interet_epargne;
        
-        //nom de l'amin
-        $adminInput = App::htmls()->createHtmlInput('text', '',$this->l('Administrateur(nom)'));
-        $adminField = App::htmls()->createFormField('admin', null,  $adminInput);
-        $form->addChild($adminField);
+    }
+    protected function processSelectMembre()
+    {
+        $membre = new AccessibilityProvider($this->input->getLang());
+        $select = App::htmls()->createSelect('my_select',$membre, null, true);
+        $this->result->setContent($select);
+    }
+    protected function processField()
+   { $epar=0;
+        $form = App::htmls()->createForm($this->urlCreator->createDefaultUrl());
+        $field = App::htmls()->createFormField('field1', App::createHtmlLabel('Field'), App::htmls()->createHtmlInput('text', 'field'));
+        $field->setRequired(true);
+        $field->setHelpText('My help text');
+        $field->setError('Invalid value');
+        $form->addChild($field);
+        $submit = App::htmls()->createButton(App::createHtmlString('Submit'), 'submit', null, ButtonStyle::PRIMARY);
+        $cancel = App::htmls()->createHtmlLink(App::createHtmlString('Cancel'), '#',null, '', true);
+        $form->setSubmit($submit);
+        $form->setCancel($cancel);
+        $form->setLabel('My form');
         $this->result->setContent($form);
-        //prenom de l'amin
-        $admin_prenomInput = App::htmls()->createHtmlInput('text', '',$this->l('Administrateur(prenom)'));
-        $adminField = App::htmls()->createFormField('padmin', null,  $admin_prenomInput);
-        $form->addChild($adminField);
-        $this->result->setContent($form);
-        //mot de passe
-        $this->result->setContent($form);
-        $passwordInput = App::htmls()->createHtmlInput('password', 'password', null, $this->l('Password'));
-            $passwordField = App::htmls()->createFormField('password', null, $passwordInput);
-            $form->addChild($passwordField);
-
-            //mot de passe
-        $this->result->setContent($form);
-        $passwordInput = App::htmls()->createHtmlInput('password', 'password', null, $this->l('confirmer votre Password'));
-            $passwordField = App::htmls()->createFormField('password', null, $passwordInput);
-            $form->addChild($passwordField);
-            //
-            $admin_prenomInput = App::htmls()->createHtmlInput('text', '',$this->l('Email'));
-            $adminField = App::htmls()->createFormField('email', null,  $admin_prenomInput);
-            $form->addChild($adminField);
-            $this->result->setContent($form);
-            //
-            $admin_prenomInput = App::htmls()->createHtmlInput('text', '',$this->l('Status'));
-            $adminField = App::htmls()->createFormField('status', null,  $admin_prenomInput);
-            $form->addChild($adminField);
     }
 }

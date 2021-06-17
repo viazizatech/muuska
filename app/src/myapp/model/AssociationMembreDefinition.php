@@ -6,7 +6,7 @@ use muuska\constants\FieldNature;
 use muuska\dao\constants\ReferenceOption;
 use muuska\model\AbstractModelDefinition;
 
-class LibraryTypeDefinition extends AbstractModelDefinition
+class AssociationMembreDefinition extends AbstractModelDefinition
 {
 
     protected static $instance;
@@ -22,26 +22,30 @@ class LibraryTypeDefinition extends AbstractModelDefinition
     protected function createDefinition()
     {
         return array(
-            'name' => 'library_type',
+            'name' => 'etre_membre',
             'primaries' => array(
-                'libraryId',
-                'typeId'
+                'membreId',
+                'associationId'
             ),
             'modelType' => self::MODEL_TYPE_ARRAY,
             'fields' => array(
-                'libraryId' => array(
+                'associationId' => array(
                     'type' => DataType::TYPE_INT,
                     'nature' => FieldNature::EXISTING_MODEL_ID,
                     'required' => true,
-                    'reference' => LibraryDefinition::getInstance(),
+                    'reference' => AssociationDefinition::getInstance(),
                     'onDelete' => ReferenceOption::CASCADE
                 ),
-                'typeId' => array(
+                'membreId' => array(
                     'type' => DataType::TYPE_INT,
                     'nature' => FieldNature::EXISTING_MODEL_ID,
                     'required' => true,
-                    'reference' => TypeDefinition::getInstance(),
+                    'reference' => MembreDefinition::getInstance(),
                     'onDelete' => ReferenceOption::CASCADE
+                ),
+                'date_adhesion' => array(
+                    'type' => DataType::TYPE_DATE,
+                    'validationRule' => 'isDate'
                 )
             )
         );

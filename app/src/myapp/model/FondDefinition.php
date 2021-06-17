@@ -28,7 +28,7 @@ class FondDefinition extends AbstractModelDefinition
             'multilingual' => true,
             'modelType' => self::MODEL_TYPE_ARRAY,
             'fields' => array(
-                'profilId' => array(
+                'Id' => array(
                     'type' => DataType::TYPE_INT,
                     'nature' => FieldNature::EXISTING_MODEL_ID,
                     'required' => true,

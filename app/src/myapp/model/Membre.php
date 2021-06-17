@@ -20,11 +20,11 @@ class Membre extends AbstractModel{
 	public function setId($id){
 		$this->id = $id;
 	}
-	public function setName($nom){
-		$this->nom = $nom;
+	public function setNom($nom){
+		return $this->nom = $nom;
 	}
 	public function getNom(){
-		$this->nom ;
+		return $this->nom ;
 	}
 	public function getPrenom(){
 		return $this->prenom;
@@ -41,20 +41,26 @@ class Membre extends AbstractModel{
 	public function getpays(){
 		return $this->pays;
 	}
-	public function setAccessibility($pays){
+	public function setpays($pays){
 		$this->pays = $pays;
 	}
 	public function getTelephone(){
-		$this->telephone ;
+		return $this->telephone ;
 	}
 	public function setTelephone($telephone){
 		$this->telephone=$telephone ;
 	}
-	public function getaddresse(){
+	public function getAddresse(){
+		return $this->addresse;
+	}
+	public function setEmail($email){
+		 $this->email=$email ;
+	}
+	public function getEmail(){
 		return $this->addresse;
 	}
 	public function setAddresse($addresse){
-		$this->description = $addresse;
+			$this->description = $addresse;
     }
 	public function getPhoto(){
 		return $this->photo;

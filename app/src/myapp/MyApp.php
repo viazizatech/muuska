@@ -11,10 +11,10 @@ use myapp\model\MembreDefinition;
 use myapp\model\SouscrireDefinition;
 use myapp\model\SanctionDefinition ;
 use myapp\model\RemboursementDefinition;
-use myapp\model\ ProfilDefinition;//Unexpected
+use myapp\model\ ProfilDefinition;
 use myapp\model\InteretDefinition ;
-use myapp\model\ FondDefinition;//Unexpected
-use myapp\model\ ExerciceDefinition;//Unexpected
+use myapp\model\ FondDefinition;
+use myapp\model\ ExerciceDefinition;
 use myapp\model\EtablirDefinition;
 use myapp\model\EpargnerDefinition ;
 use myapp\model\AssociationDefinition;
@@ -26,7 +26,7 @@ use myapp\model\AssociationMembreDefinition;
 
 class MyApp extends AbstractApplication
 {
-    protected $version = '4.4';
+    protected $version = '1.0';
     
     protected function registerMainDAOSources(){
         parent::registerMainDAOSources();
@@ -48,6 +48,8 @@ class MyApp extends AbstractApplication
     
     protected function createUpgradeold(){
         $daoInput = App::daos()->createProjectDAOUpgradeInput($this);
+       
+        $daoInput->addAddedModelDefinition(AssociationDefinition::getInstance());
         $daoInput->addAddedModelDefinition(EmpruntDefinition::getInstance());
         $daoInput->addAddedModelDefinition(TimbreDefinition ::getInstance());
         $daoInput->addAddedModelDefinition(EpargneDefinition::getInstance());
@@ -61,7 +63,6 @@ class MyApp extends AbstractApplication
         $daoInput->addAddedModelDefinition(ExerciceDefinition::getInstance());
         $daoInput->addAddedModelDefinition(EtablirDefinition::getInstance());
         $daoInput->addAddedModelDefinition(EpargnerDefinition ::getInstance());
-        $daoInput->addAddedModelDefinition(AssociationDefinition::getInstance());
         $daoInput->addAddedModelDefinition(TontineDefinition::getInstance());
         $daoInput->addAddedModelDefinition(AnnonceDefinition::getInstance());
         $daoInput->addAddedModelDefinition(SeanceDefinition::getInstance());
@@ -73,32 +74,14 @@ class MyApp extends AbstractApplication
         $daoInput = App::daos()->createProjectDAOUpgradeInput($this);
         
         /*Supprimer les models dont la définition a changé*
-        
-        $daoInput->addAddedModelDefinition(EmpruntDefinition::getInstance());
-        $daoInput->addAddedModelDefinition(TimbreDefinition ::getInstance());
-        $daoInput->addAddedModelDefinition(EpargneDefinition::getInstance());
-        $daoInput->addAddedModelDefinition(MembreDefinition::getInstance());
-        $daoInput->addAddedModelDefinition(souscrireDefinition ::getInstance());
-        $daoInput->addAddedModelDefinition(SanctionDefinition ::getInstance());
-        $daoInput->addAddedModelDefinition(RemboursementDefinition::getInstance());
-        $daoInput->addAddedModelDefinition(ProfilDefinition::getInstance());
-        $daoInput->addAddedModelDefinition(InteretDefinition::getInstance());
+      
         $daoInput->addAddedModelDefinition(FondDefinition::getInstance());
-        $daoInput->addAddedModelDefinition(ExerciceDefinition::getInstance());
-        $daoInput->addAddedModelDefinition(EtablirDefinition::getInstance());
-        $daoInput->addAddedModelDefinition(EpargnerDefinition ::getInstance());
-        $daoInput->addAddedModelDefinition(AssociationDefinition::getInstance());
-        $daoInput->addAddedModelDefinition(TontineDefinition::getInstance());
-        $daoInput->addAddedModelDefinition(AnnonceDefinition::getInstance());
-        $daoInput->addAddedModelDefinition(SeanceDefinition::getInstance());
-        $daoInput->addAddedModelDefinition(SanctionDefinition::getInstance());
+      
+      
         
         
         /*Ajouter les nouveaux models et des models dont définition a changé*
         
-        $daoInput->addAddedModelDefinition(MembreDefinition::getInstance());
-        $daoInput->addAddedModelDefinition(AssociationDefinition::getInstance());
-        $daoInput->addAddedModelDefinition(ProfilDefinition::getInstance());
         return App::projects()->createDefaultProjectUpgrade($this, $this->daoFactory, $daoInput);
     }*/
 }

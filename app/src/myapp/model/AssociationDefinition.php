@@ -25,6 +25,7 @@ class AssociationDefinition extends AbstractModelDefinition
             'name' => 'association',
             'primary' => 'id',
             'autoIncrement' => true,
+       
             'multilingual' => true,
             'fields' => array(
                 
@@ -87,22 +88,7 @@ class AssociationDefinition extends AbstractModelDefinition
                     'type' => DataType::TYPE_STRING,
                     'nature' => FieldNature::FILE,
                     'maxSize' => 50
-                )
-             ),
-            'associations' => array(
-                'exercice' => array(
-                    'reference' => ExerciceDefinition::getInstance(),
-                    'field' => 'associationId'
                 ),
-                'tontine' => array(
-                    'reference' => TontineDefinition::getInstance(),
-                    'field' => 'associationId'
-                )
-                ,
-                'membre' => array(
-                    'reference' => TontineDefinition::getInstance(),
-                    'field' => 'associationId'
-                )
             )
         );
         

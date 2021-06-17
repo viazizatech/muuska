@@ -32,7 +32,7 @@ class EtablirDefinition extends AbstractModelDefinition
                     'type' => DataType::TYPE_INT,
                     'nature' => FieldNature::EXISTING_MODEL_ID,
                     'required' => true,
-                    'reference' => MembreDefinition::getInstance(),
+                    'reference' => SanctionDefinition::getInstance(),
                     'onDelete' => ReferenceOption::CASCADE
                 ),
                 'profilId' => array(

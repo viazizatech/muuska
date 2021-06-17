@@ -73,20 +73,6 @@ class MembreDefinition extends AbstractModelDefinition
                     'required' => true,
                     'maxSize' => 100
                 )    
-            ),
-            'associations' => array(
-                'emprunt' => array(
-                    'reference' => EmpruntDefinition::getInstance(),
-                    'field' => 'membreId'
-                ),
-                'profil' => array(
-                    'reference' => ProfilDefinition::getInstance(),
-                    'field' => 'membreId'
-                ),
-                'epargner' => array(
-                    'reference' => EpargnerDefinition::getInstance(),
-                    'field' => 'membreId'
-                ),
             )
         );
     }

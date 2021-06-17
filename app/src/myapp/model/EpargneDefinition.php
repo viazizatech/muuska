@@ -61,12 +61,13 @@ class EpargneDefinition extends AbstractModelDefinition
                 ),
                 
                 ),
-                'association' => array(
-                    'epargner' => array(
-                        'reference' => EpargnerDefinition::getInstance(),
+                'associations' => array(
+                    'Seance' => array(
+                        'reference' => SeanceDefinition::getInstance(),
                         'field' => 'epargneId'
-                    )
+                    ),
                 )
         );
     }
+   
 }

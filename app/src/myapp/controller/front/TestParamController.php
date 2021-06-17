@@ -3,7 +3,7 @@ namespace myapp\controller\front;
 
 use muuska\controller\AbstractController;
 use muuska\util\App;
-use myapp\model\LibraryDefinition;
+use myapp\model\AssociationDefinition;
 
 class TestParamController extends AbstractController
 {
@@ -12,7 +12,7 @@ class TestParamController extends AbstractController
         /*$parsers = array(App::controllers()->createDefaultControllerParamParser('name', true));
         $this->paramResolver = App::controllers()->createDefaultControllerParamResolver($this->input, $this->result, $parsers);*/
         
-        $parsers = array(App::controllers()->createModelControllerParamParser(LibraryDefinition::getInstance(), 'id', true));
+        $parsers = array(App::controllers()->createModelControllerParamParser(AssociationDefinition::getInstance(), 'id', true));
         $this->paramResolver = App::controllers()->createDefaultControllerParamResolver($this->input, $this->result, $parsers);
     }
     

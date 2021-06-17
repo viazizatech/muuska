@@ -6,7 +6,26 @@ use muuska\controller\AbstractController;
 use muuska\util\App;
 use myapp\option\AccessibilityProvider;
 use myapp\model\LibraryDefinition;
+use muuska\html\HtmlContent;
+use muuska\html\constants\ButtonStyle;
+use muuska\html\constants\IconPosition;
+use muuska\html\form;
 
+use muuska\dao\util\SelectionConfig;
+use muuska\constants\FileTypeConst;
+use myapp\model\AssociationDefinition;
+use myapp\model\MembreDefinition;
+use muuska\asset\constants\AssetType;
+use muuska\html\listing\item\ListItem;
+use \muuska\html\listing\tree\MenuList;
+use \muuska\html\listing\tree\HtmlTree;
+use muuska\html\listing\item\ListItemContainer;
+use myapp\model\EpargneDefinition;
+use myapp\model\ ProfilDefinition;
+use myapp\model\ SeanceDefinition;
+use muuska\html\listing\AbstractList;
+use muuska\dao\constants\DAOFunctionCode;
+use muuska\dao\constants\SortDirection;
 class TestTranslationController extends AbstractController
 {
     protected function processDefault()
@@ -54,6 +73,41 @@ class TestTranslationController extends AbstractController
     protected function processTemplates()
     {
         $template = $this->input->getProject()->createTemplate('my_template');
+        $areaCreator = App::htmls()->createDefaultAreaCreator();
+/*Banner*/
+$bannerTitle = $this->l('Is there professional in your competence');
+$bannerSubTitle = $this->l('Everyone can become pro');
+$mainLink = App::htmls()->createHtmlLink(App::createHtmlString($this->l('Get started')), '#', null, $this->l('Click here to start'), true,ButtonStyle::PRIMARY);
+$image = $this->input->getSubProject()->createHtmlImage('banner.jpg');
+$banner = App::htmls()->createBanner($image, $bannerTitle,
+$bannerSubTitle, $mainLink);
+$areaCreator->addHtmlComponent($banner, 'banner');
+/*Picto*/
+$pictorData = array(
+array(
+'icon' => 'fa fa-chalkboard-teacher',
+'title' => $this->l('Training'),
+'subTitle' => $this->l('You will be trained.'),
+),
+array(
+'icon' => 'fa fa-graduation-cap',
+'title' => $this->l('Certification'),
+'subTitle' => $this->l('You will be certified.'),
+),
+array(
+'icon' => 'fa fa-handshake',
+'title' => $this->l('Work'),
+'subTitle' => $this->l('You will have work'),
+),
+);
+$picto = App::htmls()->createPresentationList($pictorData);
+$picto->addClass('picto');
+$picto->createIconField(App::renderers()->createClassIconValueRenderer(App::getters()->createArrayValueGetter('icon')));
+$picto->createTitleField(App::renderers()->createSimpleValueRenderer(App::getters()->createArrayValueGetter('title')));
+$picto->createSubTitleField(App::renderers()->createSimpleValueRenderer(App::getters()->createArrayValueGetter('subTitle')));
+$areaCreator->addHtmlComponent($picto, 'picto');
+/*categories*/
+
         $this->result->setContent(App::htmls()->createHtmlCustomElement(null, $template));
     }
     
