@@ -24,18 +24,6 @@
         "lastModifiedDate": "2020-08-25 09:07:28"
     },
     {
-        "id": 3,
-        "type": "MODULE",
-        "name": "mymod",
-        "active": 1,
-        "version": "1.0",
-        "eventString": "",
-        "mainClass": "mymod\\MyMod",
-        "lastUpgradeDate": "",
-        "creationDate": "2020-08-11 08:39:35",
-        "lastModifiedDate": "2020-08-11 08:39:35"
-    },
-    {
         "id": 4,
         "type": "FRAMEWORK",
         "name": "",
@@ -70,5 +58,41 @@
         "lastUpgradeDate": "",
         "creationDate": "2020-08-25 09:07:45",
         "lastModifiedDate": "2020-08-25 09:07:45"
+    },
+    {
+        "id": 7,
+        "type": "FRAMEWORK",
+        "name": "",
+        "active": 1,
+        "version": "1.0",
+        "eventString": "admin_controller_page_formating",
+        "mainClass": "muuska\\project\\Framework",
+        "lastUpgradeDate": "",
+        "creationDate": "2020-08-28 14:47:27",
+        "lastModifiedDate": "2020-08-28 14:47:27"
+    },
+    {
+        "id": 8,
+        "type": "APPLICATION",
+        "name": "",
+        "active": 1,
+        "version": "1.0",
+        "eventString": "",
+        "mainClass": "myapp\\MyApp",
+        "lastUpgradeDate": "",
+        "creationDate": "2020-08-28 14:47:27",
+        "lastModifiedDate": "2020-08-28 14:47:27"
+    },
+    {
+        "id": 9,
+        "type": "MODULE",
+        "name": "mymod",
+        "active": 1,
+        "version": "1.0",
+        "eventString": "",
+        "mainClass": "mymod\\MyMod",
+        "lastUpgradeDate": "",
+        "creationDate": "2020-10-05 14:50:20",
+        "lastModifiedDate": "2020-10-05 14:50:20"
     }
 ]
