@@ -11,6 +11,12 @@
             "app\\": "./"
         }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/viazizatech/muuska-install"
+        }
+    ],
     "require": {
         "vlucas/phpdotenv": "^5.3",
         "vendor/muuska": "1.0.5",
