@@ -13,7 +13,7 @@
     },
     "require": {
         "vlucas/phpdotenv": "^5.3",
-        "muuska/muuska": "1.0.5",
+        "/muuska": "1.0.5",
         "nesbot/carbon": "^2.39",
         "phpmailer/phpmailer": "^6.4"
     },
