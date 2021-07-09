@@ -1,5 +1,5 @@
 {
-    "name": "muuska/app",
+    "name": "muuska/muuska",
     "authors": [
         {
             "name": "ViaZi Za Tech",
@@ -13,7 +13,6 @@
     },
     "require": {
         "vlucas/phpdotenv": "^5.3",
-        "muuska/php-mvc-core": "1.0.5",
         "nesbot/carbon": "^2.39",
         "phpmailer/phpmailer": "^6.4"
     },
