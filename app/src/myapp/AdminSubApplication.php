@@ -42,6 +42,8 @@ class AdminSubApplication extends AbstractSubApplication implements ControllerPa
                                     $result = new \myapp\controller\admin\SanctionAdminController($input);
          } elseif ($input->checkName('annonce')) {
                                 $result = new \myapp\controller\admin\AnnonceAdminController($input);
+        }elseif ($input->checkName('utilisateur')) {
+            $result = new \myapp\controller\front\UtilisateurController($input);
         };
         
         return $result;

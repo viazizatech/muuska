@@ -5,5 +5,8 @@ use muuska\controller\AbstractController;
 
 class AssoHomeController extends AbstractController
 {	
-	
+	// default function 
+    protected function processDefault(){
+        
+    }
 }

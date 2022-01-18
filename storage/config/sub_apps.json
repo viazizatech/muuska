@@ -6,7 +6,7 @@
 	"ADMIN": {
 		"url_path": "admin",
 		"lang_in_url": true,
-		"authentification_required": false,
+		"authentification_required": true,
 		"access_checking_required": false
 	}
 }

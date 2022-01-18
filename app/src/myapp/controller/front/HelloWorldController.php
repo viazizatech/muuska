@@ -9,7 +9,7 @@ class HelloWorldController extends AbstractController
 {
     protected function processDefault()
     {
-        $this->result->addAlerts(AlertType::INFO, array('Info 1', 'Info 2'));
+        $this->result->addError('Erreur de test');
     }
     
     protected function processSayGoodbye()

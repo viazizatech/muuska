@@ -7,5 +7,5 @@
     "app_installed": false,
     "ssl_enabled": false,
     "server_host": "localhost",
-    "context_path": "\/assocmanager"
+    "context_path": "\/app"
 }
