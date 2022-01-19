@@ -22,7 +22,6 @@ use myapp\model\TontineDefinition ;
 use myapp\model\AnnonceDefinition;
 use myapp\model\SeanceDefinition;
 use myapp\model\AssociationMembreDefinition;
-use myapp\model\UtilisateurDefinition;
 
 
 class MyApp extends AbstractApplication
@@ -71,18 +70,18 @@ class MyApp extends AbstractApplication
         return App::projects()->createDefaultProjectUpgrade($this, $this->daoFactory, $daoInput);
     }
     
-   protected function createUpgrade(){
+   /*protected function createUpgrade(){
         $daoInput = App::daos()->createProjectDAOUpgradeInput($this);
         
-        /*Supprimer les models dont la définition a changé*/
+        /*Supprimer les models dont la définition a changé*
       
-        $daoInput->addRemovedModelDefinition(UtilisateurDefinition::getInstance());
-        $daoInput->addAddedModelDefinition(UtilisateurDefinition::getInstance());
+        $daoInput->addAddedModelDefinition(FondDefinition::getInstance());
+      
       
         
         
-        /*Ajouter les nouveaux models et des models dont définition a changé*/
+        /*Ajouter les nouveaux models et des models dont définition a changé*
         
         return App::projects()->createDefaultProjectUpgrade($this, $this->daoFactory, $daoInput);
-    }
+    }*/
 }

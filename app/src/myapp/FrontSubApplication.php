@@ -12,7 +12,7 @@ class FrontSubApplication extends AbstractSubApplication
         }elseif ($input->checkName('association')) {
             $result = new \myapp\controller\front\AssoModelController ($input);
         }elseif ($input->checkName('home')) {
-            $result = new \myapp\controller\front\HomeController ($input);
+            $result = new \myapp\controller\front\AssoModelController ($input);
          } elseif ($input->checkName('test-model')) {
             $result = new \myapp\controller\front\TestAssoDaoController($input);
         }elseif ($input->checkName('test-param')) {
@@ -23,8 +23,6 @@ class FrontSubApplication extends AbstractSubApplication
             $result = new \myapp\controller\front\TestTranslationController($input);
         }elseif ($input->checkName('test-html')) {
             $result = new \myapp\controller\front\TestHtmlController($input);
-        }elseif ($input->checkName('utilisateur')) {
-            $result = new \myapp\controller\front\UtilisateurController($input);
         }
         return $result;
     }
